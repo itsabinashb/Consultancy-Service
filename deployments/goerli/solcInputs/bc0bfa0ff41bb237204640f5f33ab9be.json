@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Consultancy.sol": {
+      "content": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.13;\n\ncontract Consultancy {\n    mapping(address => bool) public consumer;\n    mapping(address => bool) public advisor;\n    address  public Advisor;\n    address owner;\n\n    constructor(address _advisor) {\n        owner = payable(msg.sender);\n        require(!advisor[_advisor]);\n        advisor[_advisor] = true;\n        Advisor = payable(_advisor);\n    }\n\n    function openchannelAsConsumer() public payable {\n        require(!consumer[msg.sender]);\n        consumer[msg.sender] = true;\n    }\n\n    function closeChannel(address _signer, Verify calldata verify) public {\n        require(consumer[msg.sender] == true);\n        bytes32 hashed = keccak256(abi.encodePacked(verify.message));\n        bytes32 prefixedHash = keccak256(\n            abi.encodePacked(\"\\x19Ethereum Signed Message:\\n32\", hashed)\n        );\n        address signer = ecrecover(\n            prefixedHash,\n            verify.sig.v,\n            verify.sig.r,\n            verify.sig.s\n        );\n        if (_signer == signer) {\n            (bool sent, ) = address(Advisor).call{value: 0.025 ether}(\"\");\n            require(sent);\n        }\n    }\n\n    struct Verify {\n        string message;\n        Signature sig;\n    }\n\n    struct Signature {\n        bytes32 r;\n        bytes32 s;\n        uint8 v;\n    }\n\n    function addAdvisor(address _advisor) public onlyOwner {\n        require(!advisor[_advisor]);\n        advisor[_advisor] = true;\n    }\n\n    function removeAdvisor(address _advisor) public onlyOwner {\n        require(advisor[_advisor] == true);\n        delete advisor[_advisor];\n    }\n\n    function withdraw() public onlyOwner {\n        (bool sent, ) = owner.call{value: 0.025 ether}(\"\");\n        require(sent);\n    }\n\n    modifier onlyOwner() {\n        require(msg.sender == owner);\n        _;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

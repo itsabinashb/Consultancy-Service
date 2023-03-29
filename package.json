@@ -1,0 +1,30 @@
+{
+  "name": "Consultancy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
+    "@nomiclabs/hardhat-ethers": "^2.2.2",
+    "@nomiclabs/hardhat-etherscan": "^3.1.6",
+    "@openzeppelin/contracts": "^4.8.1",
+    "chai": "^4.3.7",
+    "dotenv": "^16.0.3",
+    "hardhat": "^2.12.7",
+    "hardhat-deploy": "^0.11.24",
+    "hardhat-shorthand": "^1.0.0",
+    "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "@web3uikit/core": "^0.2.47",
+    "@web3uikit/icons": "^0.2.46",
+    "@web3uikit/web3": "^0.2.2",
+    "ethers": "5.7.2",
+    "moment": "^2.29.4",
+    "moralis-v1": "^1.12.0",
+    "nodemon": "^2.0.21",
+    "react-moralis": "^1.4.2",
+    "socket.io": "^4.6.1",
+    "web3uikit": "^1.0.4"
+  }
+}
