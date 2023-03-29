@@ -3,11 +3,11 @@ import React from "react"
 //import { useDisconnect } from "wagmi"
 
 
-function Abort({ contract,provider }) {
+async function Abort({ contract,provider }) {
     //const { disconnect } = useDisconnect()
     
 
-    function handleAbort() {
+    await function handleAbort() {
         contract.abort({ gasLimit: 200000 })
         //disconnect()
         
