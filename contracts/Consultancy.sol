@@ -16,12 +16,13 @@ contract Consultancy {
         require(!advisor[_advisor]);
         advisor[_advisor] = true;
         Advisor = payable(_advisor);
-        currentTime = block.timestamp;
+        
     }
 
     function openchannelAsConsumer() public payable {
         require(!consumer[msg.sender], "Error: already a consumer");
         consumer[msg.sender] = true;
+        currentTime = block.timestamp;
     }
 
     function closeChannel(
