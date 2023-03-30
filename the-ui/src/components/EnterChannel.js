@@ -24,14 +24,20 @@ export default function EnterChannel({ values, provider }) {
         console.log(`from EnterChannel contract address is ${contract.address}`)
         console.log(`From EnterChannel provider is ${contract.provider}`)
 
-        if (
-            await contract.openchannelAsConsumer({
-                value: ethers.utils.parseEther("0.00005"),
-                gasLimit: 200000,
-            })
-        ) {
-            setReadyToEnter(true)
-        }
+//         if (
+//             await contract.openchannelAsConsumer({
+//                 value: ethers.utils.parseEther("0.00005"),
+//                 gasLimit: 200000,
+//             })
+//         ) {
+//             setReadyToEnter(true)
+//         }
+        
+        const transaction = await contract.openchannelAsConsumer({
+            value: ethers.utils.parseEther("0.00005")
+        })
+
+        await transaction.wait().then(setReadyToEnter(true))
 
         setAdvisor(await contract.Advisor())
         setOwner(await contract.owner())
