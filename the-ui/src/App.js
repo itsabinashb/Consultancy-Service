@@ -8,7 +8,7 @@ const _abi = abi.abi
 console.log("abi is", _abi)
 let _signer
 let _contract
-const address = "0x6477dfD1622D7f90E75080f396B78159590e5cB8"
+const address = "0x18b70A4bE01eA22Da80EFAC86fa3FeE59e252FEB"
 
 let signerAddress
 export default function App() {
